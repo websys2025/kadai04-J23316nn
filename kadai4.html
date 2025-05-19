@@ -7,6 +7,7 @@
 <body>
     <h1 id="vending-machine">自動販売機システム</h1>
     <table id="item_area" border="1"></table>
+
     <script>
         const items =  [
             { id: 1, name: "緑茶", price: 140, stock: 5 },
@@ -17,32 +18,23 @@
             { id: 6, name: "サイダー", price: 160, stock: 3 },
             { id: 7, name: "コーヒー", price: 170, stock: 8 },
             { id: 8, name: "紅茶", price: 140, stock: 6 }
-        ]
+        ];
 
         class Item {
             static number = 1;
             constructor(name, price, stock) {
-                this.id = Item.number;
+                this.id = Item.number++;
                 this.name = name;
                 this.price = price;
                 this.stock = stock;
-                Item.number++;
-            }
-
-            static showItemList(list) {
-                console.log("商品は以下の" + list.length + "種類です。");
-                for (let item of list) {
-                    console.log("商品番号: " + item.id + ", 商品名: " + item.name + ", 金額: " + item.price + ", 在庫数: " + item.stock);
-                }
-                console.log("");
             }
 
             buyItem() {
-                if (this.stock >= 1) {
-                    console.log("商品番号: " + this.id + ", 商品名: " + this.name + "を購入します。");
+                if (this.stock > 0) {
+                    console.log(`商品番号: ${this.id}, 商品名: ${this.name} を購入します。`);
                     this.stock--;
                 } else {
-                    console.log(this.name + "は商品の在庫がないため購入できません。");
+                    console.log(`${this.name} は商品の在庫がないため購入できません。`);
                 }
             }
         }
@@ -50,32 +42,26 @@
         const itemArea = document.getElementById("item_area");
         itemArea.innerHTML += "<tr><th>商品名</th><th>金額</th><th>在庫数</th><th>購入</th></tr>";
 
-        const item_list = new Array(items.length);
+        const itemList = items.map(item => new Item(item.name, item.price, item.stock));
 
-        for (let i = 0; i < items.length; i++) {
-            item_list[i] = new Item(items[i].name, items[i].price, items[i].stock);
-        }
-
-        Item.showItemList(item_list);
-
-        for (let i = 0; i < item_list.length; i++) {
+        for (let i = 0; i < itemList.length; i++) {
             const row = document.createElement("tr");
 
             const nameCell = document.createElement("td");
-            nameCell.textContent = item_list[i].name;
+            nameCell.textContent = itemList[i].name;
 
             const priceCell = document.createElement("td");
-            priceCell.textContent = item_list[i].price + "円";
+            priceCell.textContent = `${itemList[i].price}円`;
 
             const stockCell = document.createElement("td");
-            stockCell.textContent = item_list[i].stock;
+            stockCell.textContent = itemList[i].stock;
 
             const buttonCell = document.createElement("td");
             const button = document.createElement("button");
             button.textContent = "購入";
             button.addEventListener("click", () => {
-                item_list[i].buyItem();
-                stockCell.textContent = item_list[i].stock;
+                itemList[i].buyItem();
+                stockCell.textContent = itemList[i].stock;
             });
             buttonCell.appendChild(button);
 
@@ -98,6 +84,7 @@
 <body>
     <h1 id="vending-machine">自動販売機システム</h1>
     <table id="item_area" border="1"></table>
+
     <script>
         const items =  [
             { id: 1, name: "緑茶", price: 140, stock: 5 },
@@ -108,32 +95,23 @@
             { id: 6, name: "サイダー", price: 160, stock: 3 },
             { id: 7, name: "コーヒー", price: 170, stock: 8 },
             { id: 8, name: "紅茶", price: 140, stock: 6 }
-        ]
+        ];
 
         class Item {
             static number = 1;
             constructor(name, price, stock) {
-                this.id = Item.number;
+                this.id = Item.number++;
                 this.name = name;
                 this.price = price;
                 this.stock = stock;
-                Item.number++;
-            }
-
-            static showItemList(list) {
-                console.log("商品は以下の" + list.length + "種類です。");
-                for (let item of list) {
-                    console.log("商品番号: " + item.id + ", 商品名: " + item.name + ", 金額: " + item.price + ", 在庫数: " + item.stock);
-                }
-                console.log("");
             }
 
             buyItem() {
-                if (this.stock >= 1) {
-                    console.log("商品番号: " + this.id + ", 商品名: " + this.name + "を購入します。");
+                if (this.stock > 0) {
+                    console.log(`商品番号: ${this.id}, 商品名: ${this.name} を購入します。`);
                     this.stock--;
                 } else {
-                    console.log(this.name + "は商品の在庫がないため購入できません。");
+                    console.log(`${this.name} は商品の在庫がないため購入できません。`);
                 }
             }
         }
@@ -141,32 +119,26 @@
         const itemArea = document.getElementById("item_area");
         itemArea.innerHTML += "<tr><th>商品名</th><th>金額</th><th>在庫数</th><th>購入</th></tr>";
 
-        const item_list = new Array(items.length);
+        const itemList = items.map(item => new Item(item.name, item.price, item.stock));
 
-        for (let i = 0; i < items.length; i++) {
-            item_list[i] = new Item(items[i].name, items[i].price, items[i].stock);
-        }
-
-        Item.showItemList(item_list);
-
-        for (let i = 0; i < item_list.length; i++) {
+        for (let i = 0; i < itemList.length; i++) {
             const row = document.createElement("tr");
 
             const nameCell = document.createElement("td");
-            nameCell.textContent = item_list[i].name;
+            nameCell.textContent = itemList[i].name;
 
             const priceCell = document.createElement("td");
-            priceCell.textContent = item_list[i].price + "円";
+            priceCell.textContent = `${itemList[i].price}円`;
 
             const stockCell = document.createElement("td");
-            stockCell.textContent = item_list[i].stock;
+            stockCell.textContent = itemList[i].stock;
 
             const buttonCell = document.createElement("td");
             const button = document.createElement("button");
             button.textContent = "購入";
             button.addEventListener("click", () => {
-                item_list[i].buyItem();
-                stockCell.textContent = item_list[i].stock;
+                itemList[i].buyItem();
+                stockCell.textContent = itemList[i].stock;
             });
             buttonCell.appendChild(button);
 
@@ -180,4 +152,3 @@
     </script>
 </body>
 </html>
-
